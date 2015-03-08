@@ -1,7 +1,7 @@
 {
   "name": "react-playground",
   "version": "1.0.0",
-  "description": "A bunch of different react projects.",
+  "description": "A bunch of different react projects and examples.",
   "author": "Michael Hibbs <hibbs.michael@gmail.com>",
   "license": "ISC",
   "devDependencies": {

@@ -41,25 +41,14 @@ module.exports = (grunt) ->
       main:
         files: [
             rename: (dest, src) ->
-              ret = dest + src
+              # Create the .js file inside a /js folder
+              # instead of the same folder as the .jsx
               ext = ".js"
 
-              # Create the .js file inside a /js folder
-              # if it exists in a folder above the curret
-              # .jsx file.
-              # Otherwise create it inside the same folder.
-              if (typeof dest == "undefined") 
-                assets = path.dirname path.dirname src
-                jsdir = path.join assets, "/js"
-                filename = path.basename src
+              jsdir = path.join path.dirname(src), "/js"
+              filename = path.basename src
 
-                console.log path.join jsdir, filename
-
-                if (fs.existsSync jsdir) 
-                  ret = path.join jsdir, filename 
-                
-
-              return ret
+              return path.join jsdir, filename
 
             expand: true
             src: ['app/**/*.jsx', 'playground/**/*.jsx']

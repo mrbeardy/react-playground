@@ -7,17 +7,69 @@ var hangman = {};
   Application = React.createClass({displayName: "Application",
     GAME_STATES: {
       PLAYING:  0x01,
-      WON:      0x02,
-      LOST:     0x04
+      WIN:      0x02,
+      LOSE:     0x04
     },
     
     LETTERS: "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(''),
+    MAX_MISSES: 9,
+
+    // TODO: Come up with a better way to do this.
+    HANGMAN: [
+      "       ________         ",
+      "      |        |        ",
+      "      |        |        ",
+      "      |        0        ",
+      "      |       /-\\      ",
+      "      |       / \\      ",
+      "      |                 ",
+      "      |                 ",
+      "      |                 ",
+      "      |                 ",
+      "  ====================  ",
+      "  |                  |  ",
+      "  X                  X  ",
+    ],
+
+    HANGMAN_MAP: [
+      "       22222222         ",
+      "      1        3        ",
+      "      1        3        ",
+      "      1        4        ",
+      "      1       576       ",
+      "      1       8 9       ",
+      "      1                 ",
+      "      1                 ",
+      "      1                 ",
+      "      1                 ",
+      "                        ",
+      "                        ",
+      "                        ",
+    ],
+
+    HANGMAN_WIN: [
+      "                        ",
+      "                        ",
+      "    ________________    ",
+      "   |                |   ",
+      "   |   Thank You!   |   ",
+      "   |                |   ",
+      "   ------------------   ",
+      "          \\0/          ",
+      "           |            ",
+      "          / \\          ",
+      "  ====================  ",
+      "  |                  |  ",
+      "  X                  X  ",
+    ],
+
 
     getInitialState: function() {
       var state = {
         word: [],
         words: [],
         lettersChosen: [],
+        misses: 0,
         gameState: this.GAME_STATES.PLAYING
       }
 
@@ -52,6 +104,7 @@ var hangman = {};
 
       state.word = this.randomword().split('');
       state.lettersChosen = [];
+      state.misses = 0;
       state.gameState = this.GAME_STATES.PLAYING;
 
       this.setState(state);
@@ -76,23 +129,57 @@ var hangman = {};
 
     chooseLetter: function( e ) {
       var target = e.currentTarget,
-          letter = target.innerHTML;
+          letter = target.innerHTML
 
       if ( target.hasAttribute("disabled") ) return;
 
-      this.state.lettersChosen.push(letter);
-      this.setState({ lettersChosen: this.state.lettersChosen });
+      var state = this.state,
+          wasGoodChoice = state.word.join('').toUpperCase().indexOf( letter ) > -1;
+
+      if (state.misses == this.MAX_MISSES) {
+      }
+      
+      state.lettersChosen.push(letter);
+
+      if (!wasGoodChoice) {
+        state.misses++;
+      }
+
+      this.setState(state);
       
       if (this.hasSolved()) {
-        this.endGame( this.GAME_STATES.WON );
+        this.endGame( this.GAME_STATES.WIN );
+      } else if (state.misses == this.MAX_MISSES) {
+        this.endGame( this.GAME_STATES.LOSE );
       }
     },
 
     render: function() {
-      var gameState = this.state.gameState;
-      var isGameEnded = gameState == this.GAME_STATES.WON || gameState == this.GAME_STATES.LOST;
-      var didWin = gameState == this.GAME_STATES.WON;
-      var didLose = gameState == this.GAME_STATES.LOST;
+      var gameState   = this.state.gameState;
+      var didWin      = gameState == this.GAME_STATES.WIN;
+      var didLose     = gameState == this.GAME_STATES.LOSE;
+      var isGameEnded = didWin || didLose;
+
+      var hangman = "";
+
+      if (!didWin) {        
+        this.HANGMAN.forEach(function( row, r ) {
+          var columns = row.split('');
+          var map_columns = this.HANGMAN_MAP[ r ].split('');
+
+          columns.forEach(function( column, c ) {
+            if ( parseInt(map_columns[ c ]) <= this.state.misses || map_columns[ c ] == ' ' ) {
+              hangman += column;
+            } else {
+              hangman += " ";
+            }
+          }, this);
+
+          hangman += "\r\n";
+        }, this);
+      } else {
+        hangman = this.HANGMAN_WIN.join("\n");
+      }
 
       if (this.state.word.length > 0) {
         var letterItems = _.map(this.state.word, function(c, key) {
@@ -131,6 +218,7 @@ var hangman = {};
 
       return (
         React.createElement("main", {id: "app"}, 
+          React.createElement("div", {className: "hangman"}, hangman ), 
           React.createElement("div", {className: "word"}, letterItems ), 
           React.createElement("div", {className: "buttons"}, 
             buttons 

@@ -45,7 +45,7 @@ module.exports = (grunt) ->
               # instead of the same folder as the .jsx
               ext = ".js"
 
-              jsdir = path.join path.dirname(src), "/js"
+              jsdir = path.join path.dirname(src), "/gen-js"
               filename = path.basename src
 
               return path.join jsdir, filename

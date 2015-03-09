@@ -133,7 +133,20 @@ var ComponentExample, Application;
         ];
 
         return (
-          <TypingMarquee key={props.id} messages={messages} />
+          <div>
+            <br /><TypingMarquee messages={messages} />
+            <br /><TypingMarquee keyDelay={20} messages={["This marquee is a lot faster than the other one."]} />
+            <br />
+            <TypingMarquee messages={["I'm updating document.title."]} 
+              keyChangeCallback={
+                function(message, index, component) {
+                  document.title = message.substr(0, index);
+
+                  console.log(component);
+                }
+              } 
+            />
+          </div>
         )
       }
     }

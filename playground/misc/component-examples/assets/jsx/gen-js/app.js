@@ -133,7 +133,20 @@ var ComponentExample, Application;
         ];
 
         return (
-          React.createElement(TypingMarquee, {key: props.id, messages: messages})
+          React.createElement("div", null, 
+            React.createElement("br", null), React.createElement(TypingMarquee, {messages: messages}), 
+            React.createElement("br", null), React.createElement(TypingMarquee, {keyDelay: 20, messages: ["This marquee is a lot faster than the other one."]}), 
+            React.createElement("br", null), 
+            React.createElement(TypingMarquee, {messages: ["I'm updating document.title."], 
+              keyChangeCallback: 
+                function(message, index, component) {
+                  document.title = message.substr(0, index);
+
+                  console.log(component);
+                }
+              }
+            )
+          )
         )
       }
     }

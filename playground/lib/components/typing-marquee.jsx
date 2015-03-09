@@ -64,10 +64,7 @@ var TypingMarquee = React.createClass({
     }
     
     if (props.keyChangeCallback) {
-      props.keyChangeCallback({
-        message: currentMessage,
-        characterIndex: state.currentCharacterIndex
-      });
+        props.keyChangeCallback(currentMessage, state.currentCharacterIndex, this)
     }
 
     this.setState(state);

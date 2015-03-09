@@ -11,7 +11,7 @@ var TypingMarquee = React.createClass({
 
     keyChangeCallback:      React.PropTypes.func,
     messageChangeCallback:  React.PropTypes.func
-  },
+  },             
 
   getDefaultProps: function() {
     return {
@@ -63,10 +63,12 @@ var TypingMarquee = React.createClass({
       this.messageTimeout = setTimeout(this.messageChange, props.messageDelay);
     }
     
-    props.keyChangeCallback({
-      message: currentMessage,
-      characterIndex: state.currentCharacterIndex
-    });
+    if (props.keyChangeCallback) {
+      props.keyChangeCallback({
+        message: currentMessage,
+        characterIndex: state.currentCharacterIndex
+      });
+    }
 
     this.setState(state);
   },
@@ -100,4 +102,5 @@ var TypingMarquee = React.createClass({
   }
 });
 
+var module = module || {};
 module.exports = TypingMarquee;

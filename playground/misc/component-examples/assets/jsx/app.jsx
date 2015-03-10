@@ -142,7 +142,7 @@ var ComponentExample, Application;
                 function(message, index, component) {
                   document.title = message.substr(0, index);
 
-                  console.log(component);
+                  
                 }
               } 
             />

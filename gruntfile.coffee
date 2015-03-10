@@ -40,19 +40,15 @@ module.exports = (grunt) ->
     react:
       main:
         files: [
-            rename: (dest, src) ->
-              # Create the .js file inside a /js folder
-              # instead of the same folder as the .jsx
-              ext = ".js"
+          rename: (dest, src) ->
+            p = path.parse src
 
-              jsdir = path.join path.dirname(src), "/gen-js"
-              filename = path.basename src
+            return path.join(p.dir, p.name) + ".gen.js"
 
-              return path.join jsdir, filename
-
-            expand: true
-            src: ['app/**/*.jsx', 'playground/**/*.jsx']
-            ext: ".js"
+          expand: true
+            
+          src: ['{app,playground}/**/*.jsx']
+          ext: ".js"
         ]
   }
 

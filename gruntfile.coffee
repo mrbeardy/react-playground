@@ -14,6 +14,8 @@ util = require "util"
 
 # console.log "\n-------------------------------\n"
 
+folders = "{app,playground}/";
+
 module.exports = (grunt) ->
   require("load-grunt-tasks")(grunt)
 
@@ -25,7 +27,7 @@ module.exports = (grunt) ->
         livereload: 35729
 
       jsx:
-        files: ['{app,playground}/**/*.jsx']
+        files: [folders + '**/*.jsx']
         tasks: ['jsx']
 
       reload:
@@ -33,7 +35,7 @@ module.exports = (grunt) ->
           reload: true
 
         files: [
-          '{app,playground}/**/*.{css,html}',
+          folders + '**/*.{css,html,js}',
           'gruntfile.coffee'
         ]
 
@@ -47,8 +49,18 @@ module.exports = (grunt) ->
 
           expand: true
             
-          src: ['{app,playground}/**/*.jsx']
+          src: [folders + '**/*.jsx']
           ext: ".js"
+        ]
+
+    uglify:
+      options:
+        banner: '/*! These files are pre-generated from .jsx. Do not edit. | Generated at <%= grunt.template.today("hh:mm:ss") %> on <%= grunt.template.today("dd-mm-yyyy") %> %> */'
+      genjs:
+        files: [
+          expand: true
+          src: [ folders + '**/*.gen.js']
+          ext: ".gen.js"
         ]
   }
 
@@ -61,5 +73,5 @@ module.exports = (grunt) ->
   ]
 
   grunt.registerTask "jsx", [
-    "react"
+    "react", "uglify"
   ]

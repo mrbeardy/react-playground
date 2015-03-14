@@ -7,7 +7,7 @@ var hangman = {};
   // The code presented in this file was written in round-a-bout a single
   // session wile learning React. Take it all with a grain of salt and fire.
 
-  // Note: his file is a swear-free zone. Anyone found cursing at their 
+  // Note: this file is a swear-free zone. Anyone found cursing at their 
   // screen while reading this file is here-by obligated to fork the 
   // repo, fix the problem and issue a pull request.
 

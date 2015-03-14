@@ -40,6 +40,8 @@ module.exports = (grunt) ->
         ]
 
     react:
+      options:
+        harmony: true
       main:
         files: [
           rename: (dest, src) ->
@@ -56,6 +58,7 @@ module.exports = (grunt) ->
     uglify:
       options:
         banner: '/*! These files are pre-generated from .jsx. Do not edit. | Generated at <%= grunt.template.today("hh:mm:ss") %> on <%= grunt.template.today("dd-mm-yyyy") %> %> */'
+        beautify: true
       genjs:
         files: [
           expand: true
@@ -72,6 +75,7 @@ module.exports = (grunt) ->
     "jsx"
   ]
 
+  # TODO(mhibbs): Add support for Debug Mode which doesn't run uglify.             
   grunt.registerTask "jsx", [
-    "react", "uglify"
+    "react" #, "uglify"
   ]

@@ -22,12 +22,15 @@ This repo is also mirrored to GitHub Pages. The index page is yet to be worked o
 * [Hangman](http://mrbeardy.github.io/react-playground/playground/games/hangman) - Your run-of-the-mill hangman game.
 
 ##### Misc
-* [Component Examples](playground/misc/component-examples) - This is examples of [re-usable UI components](plaground/common/components/) I was experimenting with.
+* [Component Examples](http://mrbeardy.github.io/react-playground/playground/misc/component-examples) - This is examples of [re-usable UI components](plaground/common/components/) I was experimenting with.
 
 ## Roadmap
 
 #### General
-* Remove the live-reload scripts from the index.html pages and add support for a server. Only reason I'm not already using a server is because I've had performance troubles in the past with node.js servers, where the page seems to hang until I press refresh a bunch of times to kick it into action. Accessing the files through file:// also seems to be tons faster, because the browser isn't having to actually download anything, File I/O is much faster then Net traffic, even with a local server.
+
+* Think of a cleaner way to separate gh-pages related files from the main repo (*.gen.js).
+
+* Remove the live-reload scripts from the index.html pages and add support for a server. Only reason I'm not already using a server is because I've had performance troubles in the past with node.js servers, where the page seems to hang until I press refresh a bunch of times to kick it into action. Accessing the files through file:// also seems to be tons faster, because the browser isn't having to actually download anything, File I/O is much faster than Net traffic, even with a local server.
 
 * Alternative to above: Move the live-reload scripts into a common/ script that only runs through live-reload stuff if you're running locally.
 

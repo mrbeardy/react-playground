@@ -41,14 +41,13 @@ var ComponentExample, Application;
       examples: React.PropTypes.object.isRequired,
 
       initialExample: function(props, propName, componentName) {
-        // TODO(mhibbs): Easier way to do all of this be default?
+        // TODO(mhibbs): Easier way to do all of this by default?
         // TODO(mhibbs): If not, possibly add a new PropTypes similar
         //               to instanceOf except make it elementOf.
         var errInvalidType = "Invalid prop `intialExample` supplied to `" + componentName + "`, expected a ComponentExample.";
         var errRequired    = "Required prop 'intialExample' was not specified in `" + componentName + "`.";
         var expectedPropName = "initialExample";
 
-        // TODO(mhibbs): Remove dependency for underscore.js
         if (!_.has(props, expectedPropName)) {
           return new Error(errRequired);
         }

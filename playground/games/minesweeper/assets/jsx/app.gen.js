@@ -1,0 +1,1 @@
+/*! These files are pre-generated from .jsx. Do not edit. | Generated at 01:03:19 on 14-03-2015 %> */var minesweeper={};!function(){var a={},b=React.createClass({displayName:"Application",render:function(){return React.createElement("h1",null,"Minesweeper")}});a.render=function(){React.render(React.createElement(b,null),document.body)},a.render()}();

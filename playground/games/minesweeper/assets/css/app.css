@@ -1,0 +1,49 @@
+
+body {
+  font-family: "segoe ui", arial, helvetica, sans-serif;
+  font-size: 18px;
+}
+
+#app {
+  padding: 5px;
+  text-align: center;
+
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+#app .hangman {
+  font-size: 12px;
+  font-family: monospace;
+
+  text-align: left;
+  white-space: pre;
+
+  width: 160px;
+  margin: 0 auto;
+}
+
+#app .word {
+  margin: 20px 0;
+  font-size: 18px;
+  font-weight: normal;
+  font-family: 'code sans mono', monospace;
+}
+
+#app .word > span {
+  padding: 0px 1px;
+}
+
+#app .buttons {
+  text-align: center;
+}
+
+#app button {
+  padding: 5px;
+  margin: 10px;
+  font-family: monospace;
+}
+
+#app button[disabled] {
+  opacity: .5;
+}

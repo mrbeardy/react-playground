@@ -106,14 +106,14 @@ var ComponentExample, Application;
       });
 
       return (
-        <div style={ props.style }>
+        <main style={ props.style }>
           <select 
             onChange={this.examplesSelectChange}
             selectedValue={state.currentExample.props.id}
           >{examplesOptions}</select>
           <hr />
           { state.currentExample }
-        </div>
+        </main>
       );
     } 
   });
@@ -158,7 +158,7 @@ var ComponentExample, Application;
   App.render = function() {
     React.render(
       <Application initialExample={App.Examples.TypingMarquee} examples={ App.Examples }/>, 
-      document.body
+      document.getElementById("app")
     );
   }
 

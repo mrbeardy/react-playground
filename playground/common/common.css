@@ -1,0 +1,17 @@
+body {
+  font-family: "segoe ui", arial, helvetica, sans-serif;
+  font-size: 18px;
+}
+
+.source {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+
+  opacity: .6;
+  transition: opacity 420ms;
+}
+
+.source:hover {
+  opacity: 1;
+}

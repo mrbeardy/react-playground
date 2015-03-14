@@ -4,12 +4,20 @@ var hangman = {};
   var app = {}, hangman = app,
   Application;
 
+  // The code presented in this file was written in round-a-bout a single
+  // session wile learning React. Take it all with a grain of salt and fire.
+
+  // Note: his file is a swear-free zone. Anyone found cursing at their 
+  // screen while reading this file is here-by obligated to fork the 
+  // repo, fix the problem and issue a pull request.
+
   Application = React.createClass({
     GAME_STATES: {
       PLAYING:  0x01,
       WIN:      0x02,
       LOSE:     0x04
     },
+    
     
     LETTERS: "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(''),
     MAX_MISSES: 9,
@@ -217,7 +225,7 @@ var hangman = {};
       }
 
       return (
-        <main id="app">
+        <main>
           <div className="hangman">{ hangman }</div>
           <div className="word">{ letterItems }</div>
           <div className='buttons'>
@@ -236,7 +244,7 @@ var hangman = {};
   });
 
   app.render = function() {
-    React.render(<Application words={ wordlist }/>, document.body);
+    React.render(<Application words={ wordlist }/>, document.getElementById("app"));
   }
   app.render();
 })();
